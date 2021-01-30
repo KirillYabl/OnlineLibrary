@@ -3,8 +3,10 @@ from livereload import Server
 from more_itertools import chunked
 
 import json
+import os
 
 BOOKS_IN_COL = 2
+BOOKS_ON_PAGE = 20
 
 
 def get_books_info(path='data/books_info.json'):
@@ -13,10 +15,11 @@ def get_books_info(path='data/books_info.json'):
     return books_info
 
 
-def on_reload(template_path='template.html', render_path='index.html'):
+def on_reload(template_path='template.html', render_path='index{page_number}.html', folder='pages'):
     books_info = get_books_info()
 
     books_pairs = list(chunked(books_info, BOOKS_IN_COL, strict=False))
+    books_pages = list(chunked(books_pairs, BOOKS_ON_PAGE // BOOKS_IN_COL, strict=False))
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -24,10 +27,15 @@ def on_reload(template_path='template.html', render_path='index.html'):
     )
 
     template = env.get_template(template_path)
-    rendered_page = template.render(books_pairs=books_pairs)
 
-    with open(render_path, 'w', encoding="utf8") as file:
-        file.write(rendered_page)
+    if folder:
+        os.makedirs(folder, exist_ok=True)
+        render_path = os.path.join(folder, render_path)
+
+    for page, books_pairs in enumerate(books_pages):
+        rendered_page = template.render(books_pairs=books_pairs)
+        with open(render_path.format(page_number=page + 1), 'w', encoding="utf8") as file:
+            file.write(rendered_page)
 
 
 if __name__ == '__main__':
