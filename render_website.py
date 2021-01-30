@@ -1,7 +1,10 @@
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
+from more_itertools import chunked
 
 import json
+
+BOOKS_IN_COL = 2
 
 
 def get_books_info(path='data/books_info.json'):
@@ -13,14 +16,15 @@ def get_books_info(path='data/books_info.json'):
 def on_reload(template_path='template.html', render_path='index.html'):
     books_info = get_books_info()
 
+    books_pairs = list(chunked(books_info, BOOKS_IN_COL, strict=False))
+
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
     template = env.get_template(template_path)
-
-    rendered_page = template.render(books=books_info)
+    rendered_page = template.render(books_pairs=books_pairs)
 
     with open(render_path, 'w', encoding="utf8") as file:
         file.write(rendered_page)
