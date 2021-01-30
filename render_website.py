@@ -7,6 +7,7 @@ import os
 
 BOOKS_IN_COL = 2
 BOOKS_ON_PAGE = 20
+PAGES_SHIFT = 5
 
 
 def get_books_info(path='data/books_info.json'):
@@ -33,7 +34,10 @@ def on_reload(template_path='template.html', render_path='index{page_number}.htm
         render_path = os.path.join(folder, render_path)
 
     for page, books_pairs in enumerate(books_pages):
-        rendered_page = template.render(books_pairs=books_pairs)
+        first_page = max((page + 1) - PAGES_SHIFT, 1)
+        last_page = min((page + 1) + PAGES_SHIFT, len(books_pages))
+        rendered_page = template.render(books_pairs=books_pairs, first_page=first_page, last_page=last_page,
+                                        current_page=page + 1, global_last_page=len(books_pages))
         with open(render_path.format(page_number=page + 1), 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
