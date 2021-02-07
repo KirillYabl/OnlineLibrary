@@ -39,6 +39,17 @@ python render_website.py
 
 Pages will be recreated and you can open same page in the `pages` folder.
 
+### How to use locally
+
+1. Use instruction `How to install`
+2. Open command line (in windows `Win+R` and write `cmd` and `Ok`)
+3. Go to directory with program
+4. Write the next code
+    ```sh
+    python render_website.py
+    ```
+5. Open some page from `pages` directory
+
 ### References
 
 - [tululu.org](http://tululu.org/)
