@@ -12,13 +12,21 @@ BOOKS_ON_PAGE = 20
 PAGES_SHIFT = 5
 
 
-def get_books(path='data/books_info.json'):
+def get_books(path='media/books_info.json'):
     with open(path) as f:
         books = json.loads(f.read())
     return books
 
 
-def clean_data(books, folder='data', formats=('txt', 'jpg', 'gif')):
+def delete_unnecessary_files(books, folder='media', formats=('txt', 'jpg', 'gif')):
+    """Delete old files.
+
+    When the library is updated, some books may be added and some books may be deleted.
+    This function will delete unnecessary media files that the library doesn't use.
+
+    The files in the "folder" will be compared with the data from the "books",
+    and the difference of sets between the files in the "folder" and the files used by the library will be removed.
+    """
     current_files = []
     for format in formats:
         current_files += glob.glob(f'{folder}/**/*.{format}', recursive=True)
@@ -41,7 +49,7 @@ def clean_data(books, folder='data', formats=('txt', 'jpg', 'gif')):
 def on_reload(template_path='template.html', render_path='index{page_number}.html', folder='pages'):
     books = get_books()
 
-    clean_data(books)
+    delete_unnecessary_files(books)
 
     books_pairs = list(chunked(books, BOOKS_IN_COL, strict=False))
     books_pages = list(chunked(books_pairs, BOOKS_ON_PAGE // BOOKS_IN_COL, strict=False))

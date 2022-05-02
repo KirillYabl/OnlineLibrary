@@ -1,6 +1,6 @@
 # Online Library
 
-![](media/SiteScreenShot.jpg)
+![](static/media/SiteScreenShot.jpg)
 
 This code is the library of books. 
 
@@ -22,14 +22,14 @@ Then use `pip` (or `pip3`, if there is a conflict with Python2) to install depen
 pip install -r requirements.txt
 ```
 
-### How to upload more books on me local version of site
+### How to upload more books on my local version of site
 
 Download instructions in [this](https://github.com/KirillYabl/tululu_parser) repository.
 
 Tne next steps are:
-1. Move texts of books in `data/books` folder
-2. Move images of books in `data/images` folder
-3. Move short description of books `books_info.json` in `data` folder
+1. Move texts of books in `media/books` folder
+2. Move images of books in `media/images` folder
+3. Move short description of books `books_info.json` in `media` folder
 
 Open command line (in windows `Win+R` and write `cmd` and `Ok`). Go to directory with program or write in cmd:
 
@@ -38,6 +38,11 @@ python render_website.py
 ```
 
 Pages will be recreated and you can open same page in the `pages` folder.
+
+OR
+
+1. Open folder `pages/`
+2. Open any file
 
 ### How to use locally
 
