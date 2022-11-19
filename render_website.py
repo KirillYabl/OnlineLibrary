@@ -12,7 +12,7 @@ BOOKS_ON_PAGE = 20
 PAGES_SHIFT = 5
 
 
-def get_books(path='media/books_info.json'):
+def get_books(path='books_info.json'):
     with open(path) as f:
         books = json.loads(f.read())
     return books

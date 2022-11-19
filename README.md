@@ -29,7 +29,7 @@ Download instructions in [this](https://github.com/KirillYabl/tululu_parser) rep
 Tne next steps are:
 1. Move texts of books in `media/books` folder
 2. Move images of books in `media/images` folder
-3. Move short description of books `books_info.json` in `media` folder
+3. Move short description of books `books_info.json` in the root folder of project
 
 Open command line (in windows `Win+R` and write `cmd` and `Ok`). Go to directory with program or write in cmd:
 
