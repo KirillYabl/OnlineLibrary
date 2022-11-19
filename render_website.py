@@ -13,8 +13,8 @@ PAGES_SHIFT = 5
 
 
 def get_books(path='books_info.json'):
-    with open(path) as f:
-        books = json.loads(f.read())
+    with open(path, encoding='cp1251') as f:
+        books = json.load(f)
     return books
 
 

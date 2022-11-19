@@ -30,6 +30,7 @@ Tne next steps are:
 1. Move texts of books in `media/books` folder
 2. Move images of books in `media/images` folder
 3. Move short description of books `books_info.json` in the root folder of project
+4. (Optional) in `render_website.py` change the encoding of `books_info.json` if your encoding is different from `cp1251` 
 
 Open command line (in windows `Win+R` and write `cmd` and `Ok`). Go to directory with program or write in cmd:
 
